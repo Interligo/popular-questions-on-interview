@@ -5,3 +5,4 @@
 Навигация по репозиторию:
 * [SOLID](https://github.com/Interligo/popular-questions-on-python-interview/blob/main/SOLID.md)
 * [REST](https://github.com/Interligo/popular-questions-on-python-interview/blob/main/REST.md)
+* [HTTP](https://github.com/Interligo/popular-questions-on-python-interview/blob/main/HTTP.md)
