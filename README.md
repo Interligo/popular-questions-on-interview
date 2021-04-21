@@ -10,7 +10,7 @@
 * [Общая теория Python](https://github.com/Interligo/popular-questions-on-python-interview/blob/main/python_theory.md)
 * [Общая теория Django](https://github.com/Interligo/popular-questions-on-python-interview/blob/main/django_theory.md)
 * [Базовые алгоритмы](https://github.com/Interligo/popular-questions-on-python-interview/blob/main/basic_algorithms.md)
-* [Базовые команды git](https://github.com/Interligo/popular-questions-on-python-interview/blob/main/git_commands.md)
+* [Базовые команды Git](https://github.com/Interligo/popular-questions-on-python-interview/blob/main/git_commands.md)
 * [Базовые команды Linux](https://github.com/Interligo/popular-questions-on-python-interview/blob/main/linux_commands.md)
 * [HTTP](https://github.com/Interligo/popular-questions-on-python-interview/blob/main/HTTP.md)
 * [SOLID](https://github.com/Interligo/popular-questions-on-python-interview/blob/main/SOLID.md)
