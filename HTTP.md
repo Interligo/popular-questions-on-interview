@@ -1,4 +1,4 @@
-### 3. HTTP (HyperText Transfer Protocol)
+### HTTP (HyperText Transfer Protocol)
 
 * **Что такое HTTP**:
 
