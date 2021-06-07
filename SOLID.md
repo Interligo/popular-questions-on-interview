@@ -157,3 +157,70 @@ class IsLoggedInPermissions (Permissions):
 ```
 
 ***
+
+* Парадигмы ООП:
+
+1. Парадигма наследования - позволяет создавать сложные системы классов, избежать дублирования кода, упростить поддержку программ и многое другое.
+
+```python
+class A:
+    def some_function(self):
+        print("First function")
+        
+    def other_function(self):
+        print("Second function")
+
+
+class B:    
+    def method_in_B(self):
+        print("Third function")
+
+
+class C(A):    
+    def other_function(self):
+        print("Replaced function")
+
+
+class D(B, C):
+    pass
+
+
+d = D()
+d.method_in_B()
+d.some_function()
+d.other_function()
+```
+
+2. Парадигма инкапсуляции - предлагает объединять переменные и методы, относящиеся к одному объекту в единый компонент. По сути соблюдение парадигмы инкапсуляции и заключается в создании классов.
+
+3. Парадигма полиморфизма - позволяет вместо объекта базового типа использовать его потомка, при этом не указывая это явно. 
+
+```python
+class Parent:  
+    def some_method(self):
+        print("This is Parent object")
+
+
+class Child1(Parent):  
+    def some_method(self):
+        print("This is Child1 object")
+
+
+class Child2(Parent):  
+    def some_method(self):
+        print("This is Child2 object")
+        
+        
+def who_am_i(obj):
+    obj.some_method()
+
+
+p = Parent()
+c1 = Child1()
+c2 = Child2()
+
+who_am_i(p)
+who_am_i(c1)
+who_am_i(c2)
+```
+***
