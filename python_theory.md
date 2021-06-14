@@ -218,6 +218,34 @@ lambda x: x + 1
 
 ***
 
+* Декоратор @property
+
+Этот декоратор может быть использован для определения методов в классе, которые действуют как атрибуты.
+
+```python
+class Order:
+    def __init__(self, name, price, quantity):
+        self._name = name
+        self.price = price
+        self._quantity = quantity
+        
+    @property
+    def quantity(self):
+        return self._quantity
+        
+    @quantity.setter
+    def quantity(self, value):
+        if value < 0:
+            raise ValueError('Cannot be negative.')
+        self._quantity = value
+
+
+apple_order.quantity = -10
+# ValueError: Cannot be negative
+```
+
+***
+
 * Метаклассы
 
 В Python классы являются объектами, поэтому они сами должны чем-то генерироваться. Эти конструкции представляют собой своеобразные «классы классов» и называются метаклассами. Примером встроенного метакласса является type.
@@ -331,6 +359,52 @@ Total objects: 3
 * Что такое дескриптор?
 
 Дескриптор – атрибут объекта, чьё поведение при доступе переопределяется методами `__get__`, `__set__` и `__delete__`. Если определен хотя бы один из этих методов, объект становится дескриптором.
+
+О дескрипторах чуть проще: в Python существует три варианта доступа к атрибуту. Допустим у нас есть атрибут `a` объекта `obj`:
+
+Получим значение атрибута - `some_variable = obj.a`
+
+Изменим его значение - `obj.a = 'new value'`
+
+Удалим атрибут - `del obj.a`
+
+Python позволяет перехватить выше упомянутые попытки доступа к атрибуту и переопределить связанное с этим доступом поведение. Это реализуется через механизм протокола дескрипторов.
+
+```python
+class NonNegative:
+    def __get__(self, instance, owner):
+        return instance.__dict__[self.name]
+        
+    def __set__(self, instance, value):
+        if value < 0:
+            raise ValueError('Cannot be negative.')
+        instance.__dict__[self.name] = value
+        
+    def __set_name__(self, owner, name):
+        self.name = name
+        
+        
+class Order:
+    price = NonNegative()
+    quantity = NonNegative()
+    
+    def __init__(self, name, price, quantity):
+        self._name = name
+        self.price = price
+        self.quantity = quantity
+        
+    def total(self):
+        return self.price * self.quantity
+        
+        
+apple_order = Order('apple', 1, 10)
+apple_order.total()
+# 10
+apple_order.price = -10
+# ValueError: Cannot be negative
+apple_order.quantity = -10
+# ValueError: Cannot be negative
+```
 
 ***
 
