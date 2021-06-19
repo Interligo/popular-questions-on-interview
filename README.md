@@ -18,6 +18,7 @@
 * [SOLID](https://github.com/Interligo/popular-questions-on-python-interview/blob/main/SOLID.md)
 * [REST](https://github.com/Interligo/popular-questions-on-python-interview/blob/main/REST.md)
 * [SQL](https://github.com/Interligo/popular-questions-on-python-interview/blob/main/SQL.md)
+* [Сборник информации по XPath](https://github.com/Interligo/popular-questions-on-python-interview/blob/main/about_XPath.md)
 * [Шаблоны/паттерны проектирования](https://github.com/Interligo/popular-questions-on-python-interview/blob/main/python_design_patterns.md)
 
 О популярных языках программирования:
