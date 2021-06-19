@@ -10,6 +10,7 @@
 * [Общая теория Python](https://github.com/Interligo/popular-questions-on-python-interview/blob/main/python_theory.md)
 * [Общая теория Django](https://github.com/Interligo/popular-questions-on-python-interview/blob/main/django_theory.md)
 * [Общая теория тестирования](https://github.com/Interligo/popular-questions-on-python-interview/blob/main/testing_theory.md)
+* [Тестирование API с помощью pytest](https://github.com/Interligo/popular-questions-on-python-interview/blob/main/pytest_api_practice.py)
 * [Базовые алгоритмы](https://github.com/Interligo/popular-questions-on-python-interview/blob/main/basic_algorithms.md)
 * [Базовые команды Git](https://github.com/Interligo/popular-questions-on-python-interview/blob/main/git_commands.md)
 * [Базовые команды Linux](https://github.com/Interligo/popular-questions-on-python-interview/blob/main/linux_commands.md)
@@ -18,6 +19,10 @@
 * [REST](https://github.com/Interligo/popular-questions-on-python-interview/blob/main/REST.md)
 * [SQL](https://github.com/Interligo/popular-questions-on-python-interview/blob/main/SQL.md)
 * [Шаблоны/паттерны проектирования](https://github.com/Interligo/popular-questions-on-python-interview/blob/main/python_design_patterns.md)
+
+О популярных языках программирования:
+
+![](https://github.com/Interligo/popular-questions-on-python-interview/blob/main/about_popular_pl.jpeg)
 
 Асимптотическая сложность алгоритмов:
 
