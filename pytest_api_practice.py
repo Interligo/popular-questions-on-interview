@@ -2,6 +2,7 @@ import os
 
 import pytest
 import requests
+from requests.exceptions import ConnectionError
 
 from load_environment import load_environment
 
@@ -27,6 +28,16 @@ class TestStoriesApi:
         response = requests.get(self.API_URL, headers=self.HEADERS)
         return response.json()
 
+    @pytest.fixture(scope='function')
+    def try_to_get_content_count(self):
+        """Метод для получения информации о количестве контента"""
+        try:
+            response = requests.get(self.API_URL, headers=self.HEADERS)
+            result = len(response.json())
+        except ConnectionError:
+            result = 0
+        return result
+
     def test_url_to_get_status_code_equals_200(self):
         """Тест с корректным URL API"""
         response = requests.get(self.API_URL, headers=self.HEADERS)
@@ -47,6 +58,11 @@ class TestStoriesApi:
         """Тест с проверкой количества элементов контента"""
         response = requests.get(self.API_URL, headers=self.HEADERS)
         assert len(response.json()) == 3
+
+    def test_get_content_count_with_fixture(self, try_to_get_content_count):
+        """Тест с проверкой количества элементов контента, получаемый из фикстуры"""
+        response = requests.get(self.API_URL, headers=self.HEADERS)
+        assert len(response.json()) == try_to_get_content_count
 
     @pytest.mark.parametrize('story_id', ('1', '2', '3'))
     def test_get_story_detail_without_auth_to_get_status_code_equals_403(self, story_id: str):
