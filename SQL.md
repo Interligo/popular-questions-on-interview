@@ -328,6 +328,26 @@ ORM (Object-Relational Mapping, объектно-реляционное отоб
 
 ***
 
+* MetaData и Table в SQLAlchemy:
+
+MetaData - это контейнер, который содержит информацию о схеме базы данных (таблицах, индексах, типах данных и тд).
+
+Table - содержит описание таблиц, для генерации запросов.
+
+```python
+metadata = MetaData()
+
+domains = Table(
+    'domains',
+    metadata,
+    Column('id', Integer, primary_key=True),
+    Column('name', String, unique=True),
+    Column('owner', String)
+)
+```
+
+***
+
 ![](https://github.com/Interligo/popular-questions-on-python-interview/blob/main/SQL_JOINS.jpg)
 
 ***
