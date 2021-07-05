@@ -330,13 +330,13 @@ def test_on_range():
 
 ```python
 @pytest.mark.parametrize(
-    ('iterable_obj', 'k', 'expected_anwer'), [
+    ('iterable_obj', 'k', 'expected_answer'), [
         ([1, 4, 3], 1, 1),
         (range(10), 3, 2)
     ]
 )
-def test_on_range(iterable_obj, k, expected_anwer):
-    assert kth_stat(iterable_obj, k) == expected_anwer
+def test_on_range(iterable_obj, k, expected_answer):
+    assert kth_stat(iterable_obj, k) == expected_answer
 ```
 
 В pytest есть основной конфигурационный файл `pytest.ini`. В нем можно изменить поведение pytest по умолчанию.
