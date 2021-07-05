@@ -352,6 +352,10 @@ domains = Table(
 
 ***
 
+![](https://github.com/Interligo/popular-questions-on-python-interview/blob/main/python-db-drivers.png)
+
+***
+
 * Подключение к популярным БД:
 
 **SQLite**
