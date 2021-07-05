@@ -111,6 +111,28 @@ def func(*args):
 
 ***
 
+* Способы форматирования строк:
+
+Форматирование с помощью оператора `%`: 
+
+```python
+print('string number %s, or simply %d' % (string, integer))
+```
+
+Форматирование с помощью метода str.format:
+
+```python
+print('string number {}, or simply {}'.format(string, integer))
+```
+
+Форматирование с помощью f-string:
+
+```python
+print(f'string number {string}, or simply {integer}')
+```
+
+***
+
 * Операции над множествами.
 
 1. Объединение:
@@ -216,6 +238,66 @@ lambda x: x + 1
 
 Это, по сути, "обёртки", которые дают нам возможность изменить поведение функции, не изменяя её код.
 
+```python
+def my_decorator(function_to_decorate):
+    def the_wrapper_around_the_original_function():
+        print("Я - код, который отработает до вызова функции")
+        function_to_decorate()
+        print("А я - код, срабатывающий после")
+    return the_wrapper_around_the_original_function
+
+
+@my_decorator
+def stand_alone_function():
+    print("Я простая одинокая функция, ты ведь не посмеешь меня изменять?")
+    
+    
+stand_alone_function()  
+
+# Я - код, который отработает до вызова функции
+# Я простая одинокая функция, ты ведь не посмеешь меня изменять?
+# А я - код, срабатывающий после
+```
+
+Декораторы в Python — это просто синтаксический сахар для конструкций вида: `another_stand_alone_function = my_shiny_new_decorator(another_stand_alone_function`.
+
+```python
+def decorator_passing_arbitrary_arguments(function_to_decorate):
+    # Данная "обёртка" принимает любые аргументы
+    def wrapper_accepting_arbitrary_arguments(*args, **kwargs):
+        print("Передали ли мне что-нибудь?")
+        print(args)
+        print(kwargs)
+        function_to_decorate(*args, **kwargs)
+    return wrapper_accepting_arbitrary_arguments
+
+
+@decorator_passing_arbitrary_arguments
+def function_with_no_argument():
+    print("Python is cool, no argument here.")
+
+
+function_with_no_argument()
+
+# Передали ли мне что-нибудь?
+# ()
+# {}
+# Python is cool, no argument here.
+
+
+@decorator_passing_arbitrary_arguments
+def function_with_arguments(a, b, c):
+    print(a, b, c)
+
+
+function_with_arguments(3, 2, 1)
+
+# Передали ли мне что-нибудь?
+# (3, 2, 1)
+# {}
+# 3 2 1
+```
+
 ***
 
 * Декоратор @property
@@ -274,7 +356,7 @@ apple_order.quantity = -10
 
 Одинарным подчеркиванием задаются частные переменные, функции, методы и классы, т.е. это **protected**. Все эти объекты будут проигнорированы при импорте с помощью `from module import *`.
 
-Двойное подчеркивание применяется для искажения имен атрибутов в классе (вызвать такой метод стандартным образом не получится), т.е. это **private**.
+Двойное подчеркивание применяется для искажения имен атрибутов в классе (вызвать такой метод стандартным образом не получится), т.е. это **private**. В сообществе Python двойные символы подчеркивания часто называют «дандерами» (dunders — это сокращение от англ. double underscores).
 
 ***
 
@@ -408,9 +490,37 @@ apple_order.quantity = -10
 
 ***
 
-* В чем отличие new от init?
+* В чем отличие 'new' от 'init'?
 
 Метод `__new__` используется, когда нужно управлять процессом создания нового экземпляра, а `__init__` – когда контролируется его инициализация. Поэтому new возвращает новый экземпляр класса, а init – ничего.
+
+Если необходимо переопределить new, то сделать это нужно следующим образом:
+
+```python
+class Speedometer:
+    def __init__(self, max_speed, units):
+        print('Method __init__ ...')
+        self.max_speed = max_speed
+        self.units = units
+    
+    def __new__(cls, max_speed, units):
+        print('Method __new__ ...')
+        if max_speed > 250:
+            return None
+        return super().__new__(cls)
+
+
+s1 = Speedometer(100, 'km')
+# Method __new__ ...
+# Method __init__ ...
+print(s1.max_speed)
+# 100
+
+s2 = Speedometer(300, 'km')
+# Method __new__ ...
+print(s2 is None)
+# True
+```
 
 ***
 
@@ -455,8 +565,52 @@ class Discount(InterFoo):
 
 **Итератор** является более общей концепцией, чем генератор, и представляет собой **любой объект, класс которого имеет методы __next__ и __iter__**. 
 
+```python
+list_of_numbers = [1, 2, 3]
+
+numbers_iterator = iter(list_of_numbers)
+
+next(numbers_iterator)
+# 1
+```
+
+При каждом новом вызове, функция отдаёт один элемент. Если же в итераторе элементов больше не осталось, то функция `next()` породит исключение `StopIteration`.
+
 **Генератор** – это итератор, который обычно создается путем вызова функции, **содержащей не менее одного оператора yield**. 
 Это ключевое слово действует аналогично return, но возвращает объект-генератор.
+
+Генератор — это объект, который сразу при создании не вычисляет значения всех своих элементов. Он хранит в памяти только последний вычисленный элемент, правило перехода к следующему и условие, при котором выполнение прерывается. Вычисление следующего значения происходит лишь при выполнении метода next(). Предыдущее значение при этом теряется.
+
+```python
+a = (i**2 for i in range(1,5))
+for i in a:
+    print(i)
+```
+
+Чтобы постоянно не вызывать метод `next(a)`, можно использовать цикл. В таком случае, метод `next()` будет вызывать неявно. Когда весь цикл будет пройден, то произойдет исключение `StopIteration`, но в консоль оно не будет выведено. Чтобы снова воспользоваться генератором, необходимо создать его заново.
+
+Пример практической задачи: на сервере есть огромный журнал событий log.txt, в котором хранятся сведения о работе какой-то системы за год. Из него нужно выбрать и обработать для статистики данные об ошибках — строки, содержащие слово error.
+
+```python
+with open("path\log.txt", "r") as log_file:
+     err_gen = (st for st in log_file if "error" in st)
+     for item in err_gen:
+         <обработка строки item>  
+```
+
+Таким образом, благодаря поточной обработке данных с использованием объекта-генератора, мы не получим переполнение памяти, поскольку в каждый момент времени в памяти находится только одна строка (обработанная строка стирается из памяти, а следующая записывается и обрабатывается, так до конца цикла).
+
+Функцию-генератор можно создать следующим образом:
+
+```python
+def digits_gen(k):
+    start = 1
+    for n in range(1, k):
+    yield n**2 + start
+    start += 1
+```
+
+Кроме метода `next()` у генераторов есть ещё и `close()` - останавливает выполнение генератора, `throw()` - генератор бросает исключение, `send()` - позволяет отправлять значения генератору.
 
 ***
 
