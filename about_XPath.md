@@ -5,19 +5,21 @@
 * **Что такое XPath**:
 
 Невероятно гибкий, мощный, и вместе с тем сравнительно простой инструмент для навигации по документам XML. 
+
 XPath использует выражения пути для выбора отдельных узлов или набора узлов в документе XML.
 
 ***
 
 * **Какие есть виды локаторов**?
-- id;
-- name;
-- className;
-- tagName;
-- linkText;
-- partialLinkText;
-- cssSelector;
-- xPath.
+
+    - id;
+    - name;
+    - className;
+    - tagName;
+    - linkText;
+    - partialLinkText;
+    - cssSelector;
+    - xPath.
 
 Локаторы отсортированы по скорости поиска.
 
